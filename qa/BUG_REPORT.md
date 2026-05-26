@@ -95,7 +95,7 @@ Add backend validation to check if all mandatory fields (`owner`, `pet`, `date`,
 | **Title** | POST /api/appointments takes over 2 seconds to respond |
 | **Severity** | 🟡 Medium |
 | **Priority** | 🟡 Medium |
-| **Status** | Open |
+| **Status** | ✅ Resolved (Verified on 26/05/2026) |
 | **Environment** | Local - `http://localhost:3000` |
 | **Found on** | 26/05/2026 |
 | **Found by** | Priscila Marques (QA Engineer) |
@@ -151,4 +151,4 @@ Investigate if there is any unnecessary processing occurring on the server durin
 | ID | Title | Severity | Status |
 |----|-------|----------|--------|
 | BUG-001 | API accepts appointment without "pet" field | 🔴 High | ✅ Resolved |
-| BUG-002 | POST takes more than 2 seconds to respond | 🟡 Medium | Open |
+| BUG-002 | POST takes more than 2 seconds to respond | 🟡 Medium | ✅ Resolved |

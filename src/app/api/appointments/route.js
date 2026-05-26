@@ -9,7 +9,6 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    await delay(2000); // Simulando rede lenta (2 segundos)
     const data = await request.json();
     
     // Validação de campos obrigatórios (Fix para o BUG-001)
