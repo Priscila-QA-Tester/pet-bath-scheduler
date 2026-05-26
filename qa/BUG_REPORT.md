@@ -68,7 +68,9 @@ Body: { "id": 1234, "owner": "Carlos", "pet": undefined, ... }
 
 ### 📸 Evidence
 
-> *(Screenshot showing the 201 status on Postman/Thunder Client should be attached here)*
+| Actual Result (Bug - 201 Created) | Resolved Result (Fix - 400 Bad Request) |
+|:---:|:---:|
+| ![BUG-001 Actual Result](images/bug001_actual.png) | ![BUG-001 Resolved Result](images/bug001_resolved.png) |
 
 ---
 
@@ -128,7 +130,7 @@ Time: 2.02s (2020ms)
 
 ### 📸 Evidence
 
-> *(Screenshot showing "Time: 2.02 s" in Thunder Client should be attached here)*
+![BUG-002 Actual Result](images/bug002_actual.png)
 
 ---
 
