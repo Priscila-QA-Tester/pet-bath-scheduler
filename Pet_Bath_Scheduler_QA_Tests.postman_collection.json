@@ -1,0 +1,176 @@
+{
+  "info": {
+    "name": "Pet Bath Scheduler - QA Tests",
+    "_postman_id": "pet-bath-scheduler-qa-tests",
+    "description": "Collection de testes de API para o projeto Pet Bath Scheduler. Criado por Priscila Marques como parte do portfólio de QA.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Agendamentos",
+      "item": [
+        {
+          "name": "GET - Listar todos os agendamentos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// TESTE 1: Verificar se o status code é 200 (OK)",
+                  "pm.test('Status code deve ser 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// TESTE 2: Verificar se o tempo de resposta é aceitável",
+                  "pm.test('Tempo de resposta deve ser menor que 1000ms', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+                  "});",
+                  "",
+                  "// TESTE 3: Verificar se a resposta é uma lista (Array)",
+                  "pm.test('Resposta deve ser uma lista de agendamentos', function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body).to.be.an('array');",
+                  "});",
+                  "",
+                  "// TESTE 4: Verificar se cada agendamento tem os campos obrigatórios",
+                  "pm.test('Agendamentos devem ter os campos obrigatórios', function () {",
+                  "    const body = pm.response.json();",
+                  "    if (body.length > 0) {",
+                  "        const agendamento = body[0];",
+                  "        pm.expect(agendamento).to.have.property('id');",
+                  "        pm.expect(agendamento).to.have.property('owner');",
+                  "        pm.expect(agendamento).to.have.property('pet');",
+                  "        pm.expect(agendamento).to.have.property('date');",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "appointments"]
+            },
+            "description": "Busca todos os agendamentos cadastrados no sistema. Deve retornar uma lista com status 200."
+          }
+        },
+        {
+          "name": "POST - Criar novo agendamento (Cenário Positivo)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// TESTE 1: Verificar se o status code é 201 (Created)",
+                  "pm.test('Status code deve ser 201 Created', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "// TESTE 2: Verificar se o ID foi gerado automaticamente",
+                  "pm.test('Novo agendamento deve ter um ID gerado', function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body).to.have.property('id');",
+                  "    pm.expect(body.id).to.not.be.null;",
+                  "});",
+                  "",
+                  "// TESTE 3: Verificar se os dados enviados foram salvos corretamente",
+                  "pm.test('Dados do pet devem ser salvos corretamente', function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.pet).to.equal('Bolinha');",
+                  "    pm.expect(body.owner).to.equal('Carlos');",
+                  "    pm.expect(body.breed).to.equal('Pug');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"owner\": \"Carlos\",\n  \"phone\": \"99999-0000\",\n  \"pet\": \"Bolinha\",\n  \"breed\": \"Pug\",\n  \"weight\": \"8\",\n  \"date\": \"2026-05-30\",\n  \"time\": \"14:00\",\n  \"service\": \"Bath\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "appointments"]
+            },
+            "description": "Cria um novo agendamento de banho. Deve retornar o agendamento criado com status 201."
+          }
+        },
+        {
+          "name": "POST - Criar agendamento sem dados (Cenário Negativo)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// TESTE 1: Verificar se a API rejeita dados inválidos com status 400",
+                  "pm.test('Status code deve ser 400 para dados inválidos', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "",
+                  "// TESTE 2: Verificar se a mensagem de erro existe na resposta",
+                  "pm.test('Resposta deve conter mensagem de erro', function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body).to.have.property('error');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "\"texto invalido sem chaves\"",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "appointments"]
+            },
+            "description": "Testa o cenário negativo: quando dados inválidos são enviados, a API deve retornar 400 Bad Request."
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string",
+      "description": "URL base do servidor local. Altere para a URL de produção quando necessário."
+    }
+  ]
+}

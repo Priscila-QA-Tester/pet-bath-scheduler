@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🐾 Pet Bath Scheduler
 
-## Getting Started
+Projeto de aprendizado de **QA (Quality Assurance)** com foco em testes de API REST.
 
-First, run the development server:
+---
 
+## 👩‍💻 Sobre este projeto
+
+Este é um sistema simulado de agendamento de banhos para pets. 
+O objetivo principal deste repositório é **demonstrar habilidades de testes de API**, incluindo:
+
+- ✅ Testes Manuais com **Postman / Thunder Client**
+- ✅ Validação de **Status Codes** (200, 201, 400, 500)
+- ✅ Validação de **Response Body** (estrutura JSON)
+- ✅ Testes de **Cenário Positivo e Negativo**
+
+---
+
+## 🚀 Como executar o projeto
+
+### Pré-requisitos
+- [Node.js](https://nodejs.org/) instalado
+
+### Passo 1: Instalar dependências
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Passo 2: Iniciar o servidor
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+O servidor vai rodar em: `http://localhost:3000`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧪 Como executar os testes de API (Postman)
 
-To learn more about Next.js, take a look at the following resources:
+### Passo 1: Baixar o Postman
+- Acesse [postman.com](https://www.postman.com/downloads/) e baixe a versão Desktop.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Passo 2: Importar a Collection de Testes
+1. Abra o Postman Desktop.
+2. Clique em **Import** (botão laranja no topo à esquerda).
+3. Selecione o arquivo: `Pet_Bath_Scheduler_QA_Tests.postman_collection.json`
+4. A collection vai aparecer na sua barra lateral!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Passo 3: Executar os testes
+1. Com o servidor rodando (`npm run dev`), abra a collection importada.
+2. Clique em **Run Collection**.
+3. Todos os testes vão rodar automaticamente e você verá os resultados em verde ✅ ou vermelho ❌.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📋 Endpoints da API
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Método | URL | Descrição |
+|--------|-----|-----------|
+| `GET`  | `/api/appointments` | Retorna todos os agendamentos |
+| `POST` | `/api/appointments` | Cria um novo agendamento |
+
+### Exemplo de Body para POST:
+```json
+{
+  "owner": "Carlos",
+  "phone": "99999-0000",
+  "pet": "Bolinha",
+  "breed": "Pug",
+  "weight": "8",
+  "date": "2026-05-30",
+  "time": "14:00",
+  "service": "Bath"
+}
+```
+
+---
+
+## ✅ Casos de Teste Cobertos
+
+### GET /api/appointments
+| # | Teste | Critério de Aceitação |
+|---|-------|----------------------|
+| 1 | Status Code | Deve ser **200 OK** |
+| 2 | Performance | Tempo de resposta < 1000ms |
+| 3 | Estrutura | Deve retornar um Array |
+| 4 | Campos | Cada item deve ter `id`, `owner`, `pet`, `date` |
+
+### POST /api/appointments
+| # | Teste | Critério de Aceitação |
+|---|-------|----------------------|
+| 1 | Status Code (positivo) | Deve ser **201 Created** |
+| 2 | ID gerado | Campo `id` não pode ser nulo |
+| 3 | Dados corretos | `pet`, `owner` e `breed` salvos corretamente |
+| 4 | Status Code (negativo) | Dados inválidos devem retornar **400 Bad Request** |
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+- **Next.js** - Framework do servidor (Back-end)
+- **Postman** - Ferramenta de testes de API
+- **Thunder Client** - Extensão alternativa de testes de API para VS Code
