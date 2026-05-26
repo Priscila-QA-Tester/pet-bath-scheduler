@@ -122,10 +122,12 @@ export default function Home() {
     fetchAppointments();
   };
 
-  const filteredAppointments = appointments.filter(app => 
-    app.pet.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    app.owner.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredAppointments = appointments.filter(app => {
+    const petName = app.pet || '';
+    const ownerName = app.owner || '';
+    return petName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+           ownerName.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-8 font-sans text-slate-800 relative">

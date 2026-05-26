@@ -11,6 +11,18 @@ export async function POST(request) {
   try {
     await delay(2000); // Simulando rede lenta (2 segundos)
     const data = await request.json();
+    
+    // Validação de campos obrigatórios (Fix para o BUG-001)
+    const requiredFields = ['owner', 'phone', 'pet', 'breed', 'weight', 'date', 'time', 'service'];
+    for (const field of requiredFields) {
+      if (!data[field] || (typeof data[field] === 'string' && !data[field].trim())) {
+        return NextResponse.json(
+          { error: `The field '${field}' is required` },
+          { status: 400 }
+        );
+      }
+    }
+
     const newAppointment = {
       id: Date.now(),
       ...data,
