@@ -68,9 +68,9 @@ Body: { "id": 1234, "owner": "Carlos", "pet": undefined, ... }
 
 ### 📸 Evidence
 
-| Resolved Result (Fix - 400 Bad Request) |
-|:---:|
-| ![BUG-001 Resolved Result](images/bug001_resolved.png) |
+| Actual Result (Bug - 201 Created) | Resolved Result (Fix - 400 Bad Request) |
+|:---:|:---:|
+| ![BUG-001 Actual Result](images/bug001.png) | ![BUG-001 Resolved Result](images/bug001_resolved.png) |
 
 ---
 
