@@ -14,7 +14,7 @@
 | **Title** | API returns 201 when creating appointment without "pet" field |
 | **Severity** | 🔴 High |
 | **Priority** | 🔴 High |
-| **Status** | Open |
+| **Status** | ✅ Resolved (Verified on 26/05/2026) |
 | **Environment** | Local - `http://localhost:3000` |
 | **Found on** | 26/05/2026 |
 | **Found by** | Priscila Marques (QA Engineer) |
@@ -148,5 +148,5 @@ Investigate if there is any unnecessary processing occurring on the server durin
 
 | ID | Title | Severity | Status |
 |----|-------|----------|--------|
-| BUG-001 | API accepts appointment without "pet" field | 🔴 High | Open |
+| BUG-001 | API accepts appointment without "pet" field | 🔴 High | ✅ Resolved |
 | BUG-002 | POST takes more than 2 seconds to respond | 🟡 Medium | Open |
