@@ -6,7 +6,7 @@ Feature: Pet Spa Appointment Scheduling
     Given I navigate to the Pet Spa home page
     When I fill the Pet Owner field with "Priscila"
     And I fill the Phone field with "99999-1234"
-    And I fill the Pet Name field with "Rex"
+    And I fill the Pet Name field with "Bolinha"
     And I fill the Breed field with "Poodle"
     And I fill the Weight field with "5.5"
     And I set a valid business date
@@ -15,5 +15,5 @@ Feature: Pet Spa Appointment Scheduling
     And I check the aggressive pet checkbox
     And I click on Confirm Appointment
     Then I should see the success toast message "Appointment successfully created!"
-    And the appointment for "Rex" should be displayed in the schedule list
-    And the service "Bath, Grooming & Nail Clipping" should be displayed on the "Rex" appointment card
+    And the appointment for pet "Bolinha" owned by "Priscila" with phone "99999-1234" should be displayed
+    And the service "Bath, Grooming & Nail Clipping" should be displayed on the appointment card for "Bolinha" owned by "Priscila"

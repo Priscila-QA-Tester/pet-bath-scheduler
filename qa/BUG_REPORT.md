@@ -72,6 +72,12 @@ Body: { "id": 1234, "owner": "Carlos", "pet": undefined, ... }
 |:---:|:---:|
 | ![BUG-001 Actual Result](images/bug001.png) | ![BUG-001 Resolved Result](images/bug001_resolved.png) |
 
+#### 🔄 Jira Ticket Lifecycle (Tracking)
+
+| Bug State: To Do (Reported) | Bug State: Done (Resolved) |
+|:---:|:---:|
+| ![BUG-001 Jira To Do](images/Jira_bug001_to_do.png) | ![BUG-001 Jira Done](images/jira-ticket%20-bug001.png) |
+
 ---
 
 ### 💥 Business Impact
@@ -131,6 +137,12 @@ Time: 2.02s (2020ms)
 ### 📸 Evidence
 
 ![BUG-002 Resolved Result](images/bug002_resolved.png)
+
+#### 🔄 Jira Ticket Lifecycle (Tracking)
+
+| Bug State: Done (Resolved) |
+|:---:|
+| ![BUG-002 Jira Done](images/jira-ticket%20-bug002.png) |
 
 ---
 

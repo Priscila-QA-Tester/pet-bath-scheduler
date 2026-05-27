@@ -96,6 +96,28 @@ O servidor vai rodar em: `http://localhost:3000`
 
 ---
 
+## 🔄 Fluxo de Gestão e Acompanhamento de Bugs (Jira)
+
+Para garantir o rastreio e ciclo de vida completo de cada bug identificado na API, utilizamos o **Jira** para documentar, priorizar, assinalar tarefas de desenvolvimento e validar as correções (*bug fixes*).
+
+### Exemplo de Tickets do Jira Gerenciados no Projeto:
+
+#### 1. BUG-001: Aceite de Agendamento sem Campo Obrigatório "pet"
+* **Fluxo:** Identificado ➡️ Criado Ticket em `To Do` ➡️ Desenvolvido Fix ➡️ Validado pelo QA e movido para `Done`.
+
+| Ticket Criado (To Do) | Ticket Resolvido (Done) |
+|:---:|:---:|
+| ![Jira BUG-001 To Do](qa/images/Jira_bug001_to_do.png) | ![Jira BUG-001 Done](qa/images/jira-ticket%20-bug001.png) |
+
+#### 2. BUG-002: Tempo de Resposta do POST Acima do Aceitável
+* **Fluxo:** Identificado ➡️ Investigado e Otimizado no Servidor ➡️ Validado e movido para `Done`.
+
+| Ticket Resolvido (Done) |
+|:---:|
+| ![Jira BUG-002 Done](qa/images/jira-ticket%20-bug002.png) |
+
+---
+
 ## 🛠️ Tecnologias utilizadas
 
 - **Next.js** - Framework do servidor (Back-end)
