@@ -71,6 +71,23 @@ npx cucumber-js
 | `GET`  | `/api/appointments` | Returns all registered appointments |
 | `POST` | `/api/appointments` | Creates a new appointment |
 
+---
+
+## 📈 How to Run Performance Tests (K6)
+
+We use **K6** to perform API load and stress testing, ensuring the server responds reliably and meets our service level agreements (SLAs) under concurrent user traffic.
+
+### Step 1: Install K6
+- **Windows (Winget):** `winget install k6`
+- **Mac (Homebrew):** `brew install k6`
+- Or download the installer directly from the [K6 official website](https://k6.io/docs/get-started/installation/).
+
+### Step 2: Run the Performance Script
+With the dev server running on `http://localhost:3000`, run the following command in your terminal:
+
+```bash
+& "C:\Program Files\k6\k6.exe" run tests/testes-perfomance/load-test.js
+
 ### Example JSON Payload for POST:
 ```json
 {
