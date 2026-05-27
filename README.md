@@ -1,66 +1,77 @@
 # 🐾 Pet Bath Scheduler
 
-Projeto de aprendizado de **QA (Quality Assurance)** com foco em testes de API REST.
+A **QA (Quality Assurance)** learning project focused on REST API testing and automation.
 
 ---
 
-## 👩‍💻 Sobre este projeto
+## 👩‍💻 About This Project
 
-Este é um sistema simulado de agendamento de banhos para pets. 
-O objetivo principal deste repositório é **demonstrar habilidades de testes de API**, incluindo:
+This is a simulated booking system for pet baths.
+The main objective of this repository is to **demonstrate API testing skills**, including:
 
-- ✅ Testes Manuais com **Postman / Thunder Client**
-- ✅ Validação de **Status Codes** (200, 201, 400, 500)
-- ✅ Validação de **Response Body** (estrutura JSON)
-- ✅ Testes de **Cenário Positivo e Negativo**
+- ✅ Manual Testing with **Postman / Thunder Client**
+- ✅ Validation of **Status Codes** (200, 201, 400, 500)
+- ✅ Validation of **Response Body** (JSON structure)
+- ✅ **Positive and Negative Scenario** testing
+- ✅ BDD Automated E2E testing with **Playwright + Cucumber**
 
 ---
 
-## 🚀 Como executar o projeto
+## 🚀 How to Run the Project
 
-### Pré-requisitos
-- [Node.js](https://nodejs.org/) instalado
+### Prerequisites
+- [Node.js](https://nodejs.org/) installed
 
-### Passo 1: Instalar dependências
+### Step 1: Install dependencies
 ```bash
 npm install
 ```
 
-### Passo 2: Iniciar o servidor
+### Step 2: Start the server
 ```bash
 npm run dev
 ```
 
-O servidor vai rodar em: `http://localhost:3000`
+The server will run at: `http://localhost:3000`
 
 ---
 
-## 🧪 Como executar os testes de API (Postman)
+## 🧪 How to Run the API Tests (Postman)
 
-### Passo 1: Baixar o Postman
-- Acesse [postman.com](https://www.postman.com/downloads/) e baixe a versão Desktop.
+### Step 1: Download Postman
+- Go to [postman.com](https://www.postman.com/downloads/) and download the Desktop version.
 
-### Passo 2: Importar a Collection de Testes
-1. Abra o Postman Desktop.
-2. Clique em **Import** (botão laranja no topo à esquerda).
-3. Selecione o arquivo: `Pet_Bath_Scheduler_QA_Tests.postman_collection.json`
-4. A collection vai aparecer na sua barra lateral!
+### Step 2: Import the Test Collection
+1. Open Postman Desktop.
+2. Click on **Import** (orange button in the top left).
+3. Select the file: `Pet_Bath_Scheduler_QA_Tests.postman_collection.json`
+4. The collection will appear in your sidebar!
 
-### Passo 3: Executar os testes
-1. Com o servidor rodando (`npm run dev`), abra a collection importada.
-2. Clique em **Run Collection**.
-3. Todos os testes vão rodar automaticamente e você verá os resultados em verde ✅ ou vermelho ❌.
+### Step 3: Run the tests
+1. With the server running (`npm run dev`), open the imported collection.
+2. Click on **Run Collection**.
+3. All tests will run automatically, and you will see the results in green ✅ or red ❌.
 
 ---
 
-## 📋 Endpoints da API
+## 🧪 How to Run BDD Automated Tests (Cucumber + Playwright)
 
-| Método | URL | Descrição |
-|--------|-----|-----------|
-| `GET`  | `/api/appointments` | Retorna todos os agendamentos |
-| `POST` | `/api/appointments` | Cria um novo agendamento |
+To execute the automated end-to-end user scenarios written in Gherkin syntax:
 
-### Exemplo de Body para POST:
+```bash
+npx cucumber-js
+```
+
+---
+
+## 📋 API Endpoints
+
+| Method | URL | Description |
+|--------|-----|-------------|
+| `GET`  | `/api/appointments` | Returns all registered appointments |
+| `POST` | `/api/appointments` | Creates a new appointment |
+
+### Example JSON Payload for POST:
 ```json
 {
   "owner": "Carlos",
@@ -76,50 +87,52 @@ O servidor vai rodar em: `http://localhost:3000`
 
 ---
 
-## ✅ Casos de Teste Cobertos
+## ✅ Covered Test Cases
 
 ### GET /api/appointments
-| # | Teste | Critério de Aceitação |
+| # | Test | Acceptance Criteria |
 |---|-------|----------------------|
-| 1 | Status Code | Deve ser **200 OK** |
-| 2 | Performance | Tempo de resposta < 1000ms |
-| 3 | Estrutura | Deve retornar um Array |
-| 4 | Campos | Cada item deve ter `id`, `owner`, `pet`, `date` |
+| 1 | Status Code | Must be **200 OK** |
+| 2 | Performance | Response time < 1000ms |
+| 3 | Structure | Must return an Array |
+| 4 | Fields | Each item must have `id`, `owner`, `pet`, `date` |
 
 ### POST /api/appointments
-| # | Teste | Critério de Aceitação |
+| # | Test | Acceptance Criteria |
 |---|-------|----------------------|
-| 1 | Status Code (positivo) | Deve ser **201 Created** |
-| 2 | ID gerado | Campo `id` não pode ser nulo |
-| 3 | Dados corretos | `pet`, `owner` e `breed` salvos corretamente |
-| 4 | Status Code (negativo) | Dados inválidos devem retornar **400 Bad Request** |
+| 1 | Status Code (positive) | Must be **201 Created** |
+| 2 | Auto-generated ID | Field `id` must be generated and not null |
+| 3 | Validated Data | `pet`, `owner`, and `breed` saved correctly |
+| 4 | Status Code (negative) | Invalid payload must return **400 Bad Request** |
 
 ---
 
-## 🔄 Fluxo de Gestão e Acompanhamento de Bugs (Jira)
+## 🔄 Bug Management & Tracking Flow (Jira)
 
-Para garantir o rastreio e ciclo de vida completo de cada bug identificado na API, utilizamos o **Jira** para documentar, priorizar, assinalar tarefas de desenvolvimento e validar as correções (*bug fixes*).
+To guarantee full traceability and monitor the lifecycle of each bug identified in the API, we use **Jira** to document, prioritize, assign development tasks, and validate the bug fixes.
 
-### Exemplo de Tickets do Jira Gerenciados no Projeto:
+### Example Jira Tickets Managed in the Project:
 
-#### 1. BUG-001: Aceite de Agendamento sem Campo Obrigatório "pet"
-* **Fluxo:** Identificado ➡️ Criado Ticket em `To Do` ➡️ Desenvolvido Fix ➡️ Validado pelo QA e movido para `Done`.
+#### 1. BUG-001: API accepts appointment creation without mandatory field "pet"
+* **Lifecycle:** Identified ➡️ Ticket created in `To Do` ➡️ Fix developed ➡️ Verified by QA and moved to `Done`.
 
-| Ticket Criado (To Do) | Ticket Resolvido (Done) |
+| Ticket Created (To Do) | Ticket Resolved (Done) |
 |:---:|:---:|
 | ![Jira BUG-001 To Do](qa/images/Jira_bug001_to_do.png) | ![Jira BUG-001 Done](qa/images/jira-ticket%20-bug001.png) |
 
-#### 2. BUG-002: Tempo de Resposta do POST Acima do Aceitável
-* **Fluxo:** Identificado ➡️ Investigado e Otimizado no Servidor ➡️ Validado e movido para `Done`.
+#### 2. BUG-002: POST Response Time Exceeds Quality Threshold
+* **Lifecycle:** Identified ➡️ Investigated and optimized in the backend ➡️ Verified by QA and moved to `Done`.
 
-| Ticket Resolvido (Done) |
+| Ticket Resolved (Done) |
 |:---:|
 | ![Jira BUG-002 Done](qa/images/jira-ticket%20-bug002.png) |
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## 🛠️ Technologies Used
 
-- **Next.js** - Framework do servidor (Back-end)
-- **Postman** - Ferramenta de testes de API
-- **Thunder Client** - Extensão alternativa de testes de API para VS Code
+- **Next.js** - Server Framework (Backend/Frontend)
+- **Playwright** - Automation Engine
+- **Cucumber (BDD)** - Test Scenario Parser (Gherkin)
+- **Postman** - API Testing tool
+- **Thunder Client** - VS Code API testing extension
