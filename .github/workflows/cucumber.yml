@@ -1,0 +1,46 @@
+name: 🐾 Run Cucumber BDD Tests
+
+# 1. Quando o robô deve rodar? Toda vez que fizermos "git push" ou criarmos Pull Requests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+# 2. O que o robô deve fazer? (O passo a passo do computador virtual)
+jobs:
+  run-tests:
+    # Vamos pegar emprestado um computador virtual do GitHub rodando Linux (Ubuntu)
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passo A: Baixar o código do seu repositório no computador do GitHub
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      # Passo B: Instalar o Node.js nesse computador do GitHub
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Passo C: Instalar as dependências do projeto (npm install)
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      # Passo D: Baixar os navegadores do Playwright (o Chrome virtual)
+      - name: 🌐 Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      # Passo E: Iniciar o site em segundo plano (npm run dev)
+      - name: 🚀 Start Next.js App
+        run: npm run dev &
+
+      # Passo F: Esperar o site carregar e estar 100% pronto antes de testar
+      - name: ⏳ Wait for Server to be Ready
+        run: npx wait-on http://localhost:3000 --timeout 60000
+
+      # Passo G: Executar os testes do Cucumber!
+      - name: 🧪 Run BDD Tests
+        run: npx cucumber-js
