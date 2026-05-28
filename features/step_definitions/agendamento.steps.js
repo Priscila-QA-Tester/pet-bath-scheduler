@@ -6,9 +6,12 @@ let browser;
 let page;
 
 // O 'Given' abre o site
+// O 'Given' abre o site
 Given('I navigate to the Pet Spa home page', async function () {
-  // headless: false faz o Chrome abrir de verdade na sua frente para você ver o teste!
-  browser = await chromium.launch({ headless: false }); 
+  // Se estiver na Nuvem (CI), roda invisível (headless: true). Se estiver no seu PC, abre a tela!
+  const isCI = process.env.CI === 'true';
+  browser = await chromium.launch({ headless: isCI }); 
+  
   page = await browser.newPage();
   await page.goto('http://localhost:3000');
 });
@@ -100,11 +103,35 @@ Then('the service {string} should be displayed on the {string} appointment card'
   await expect(petCard).toContainText(service);
 });
 
-// No final do teste, fecha o navegador
+Then('I should see the error toast message {string}', async function (message) {
+  const toast = page.locator('.bg-red-100');
+  await expect(toast).toBeVisible();
+  await expect(toast).toContainText(message);
+});
+
+
 After(async function () {
   if (browser) {
-    // Vamos colocar uma pausinha de 2 segundos só para você conseguir ver o resultado na tela antes de fechar rápido
+
     await page.waitForTimeout(2000); 
     await browser.close();
   }
+});
+When('I set a weekend date', async function () {
+  const dataAlvo = new Date(); // Pega o dia de hoje
+  
+  // Enquanto o dia da semana não for Sábado (dia da semana = 6), adiciona mais 1 dia
+  while (dataAlvo.getDay() !== 6) {
+    dataAlvo.setDate(dataAlvo.getDate() + 1);
+  }
+  
+  // Formata a data no formato que o calendário do site espera: AAAA-MM-DD
+  const ano = dataAlvo.getFullYear();
+  const mes = String(dataAlvo.getMonth() + 1).padStart(2, '0'); // Meses começam do 0
+  const dia = String(dataAlvo.getDate()).padStart(2, '0');
+  
+  const dataFimDeSemana = `${ano}-${mes}-${dia}`;
+  
+  // Agora preenche o campo com esse sábado dinâmico do futuro!
+  await page.fill('#date-input', dataFimDeSemana);
 });
