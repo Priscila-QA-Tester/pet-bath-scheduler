@@ -2,6 +2,8 @@ Feature: Pet Spa Appointment Scheduling
   As a pet owner
   I want to fill out the appointment form
   So that I can schedule a bath for my pet
+
+@happypath
   Scenario: Successfully create an appointment (Happy Path)
     Given I navigate to the Pet Spa home page
     When I fill the Pet Owner field with "Priscila"
@@ -17,3 +19,46 @@ Feature: Pet Spa Appointment Scheduling
     Then I should see the success toast message "Appointment successfully created!"
     And the appointment for pet "Bolinha" owned by "Priscila" with phone "99999-1234" should be displayed
     And the service "Bath, Grooming & Nail Clipping" should be displayed on the appointment card for "Bolinha" owned by "Priscila"
+
+
+@negativeweight
+    Scenario: Attempt to create an appointment with negative weight (Negative Path)
+    Given I navigate to the Pet Spa home page
+    When I fill the Pet Owner field with "Priscila"
+    And I fill the Phone field with "99999-1234"
+    And I fill the Pet Name field with "Bolinha"
+    And I fill the Breed field with "Poodle"
+    And I fill the Weight field with "-5.5"
+    And I set a valid business date
+    And I select the time "14:30"
+    And I select the service "Bath, Grooming & Nail Clipping"
+    And I click on Confirm Appointment
+    Then I should see the error toast message "Weight cannot be negative"
+
+  @negativepetowner
+  Scenario: Attempt to create an appointment without Pet Owner (Negative Path)
+    Given I navigate to the Pet Spa home page
+    When I fill the Phone field with "99999-1234"
+    And I fill the Pet Name field with "Bolinha"
+    And I fill the Breed field with "Poodle"
+    And I fill the Weight field with "5.5"
+    And I set a valid business date
+    And I select the time "14:30"
+    And I select the service "Bath, Grooming & Nail Clipping"
+    And I click on Confirm Appointment
+    Then I should see the error toast message "Please fill the Pet Owner field to finish the appointment"
+
+
+  @negativeweekend 
+  Scenario: Attempt to create an appointment on a weekend (Negative Path)
+    Given I navigate to the Pet Spa home page
+    When I fill the Pet Owner field with "Priscila"
+    And I fill the Phone field with "99999-1234"
+    And I fill the Pet Name field with "Bolinha"
+    And I fill the Breed field with "Poodle"
+    And I fill the Weight field with "5.5"
+    And I set a weekend date
+    And I select the time "14:30"
+    And I select the service "Bath, Grooming & Nail Clipping"
+    And I click on Confirm Appointment
+    Then I should see the error toast message "Appointments only Monday to Friday"
