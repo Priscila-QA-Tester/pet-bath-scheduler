@@ -1,0 +1,19 @@
+# Ignorar pastas da aplicação para as estatísticas de linguagem do GitHub
+src/* linguist-vendored
+src/**/* linguist-vendored
+public/* linguist-vendored
+public/**/* linguist-vendored
+
+# Ignorar extensões front-end globais
+*.html linguist-vendored
+*.css linguist-vendored
+*.js linguist-vendored
+*.ts linguist-vendored
+*.tsx linguist-vendored
+*.jsx linguist-vendored
+*.json linguist-vendored
+*.md linguist-vendored
+
+# Garantir que a pasta python seja contabilizada
+e2e-tests-python/* linguist-vendored=false
+e2e-tests-python/**/* linguist-vendored=false

@@ -50,3 +50,9 @@ node_modules/
 
 # Documentos pessoais (uso interno, nao subir para o GitHub)
 /docs/
+
+# Python
+venv/
+__pycache__/
+.pytest_cache/
+
